@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Site\HomeController as SiteHomeControler;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [SiteHomeControler::class,'index']);
+
+
+Route::prefix('painel')->group(Function(){
+    Route::get('/',[AdminHomeController::class,'index']);
 });
+
+
+Route::get('/authenticate',Function(){
+    echo 'Login do sistema';
+})->name('login');
