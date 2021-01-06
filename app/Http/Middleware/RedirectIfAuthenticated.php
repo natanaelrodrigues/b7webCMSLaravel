@@ -7,6 +7,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\Admin\HomeController;
+
 class RedirectIfAuthenticated
 {
     /**
@@ -23,7 +25,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                return redirect()->route('admin');
             }
         }
 

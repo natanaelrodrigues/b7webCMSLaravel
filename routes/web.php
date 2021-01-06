@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Site\HomeController as SiteHomeControler;
+use App\Http\Controllers\Admin\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,12 @@ Route::get('/', [SiteHomeControler::class,'index']);
 
 
 Route::prefix('painel')->group(Function(){
-    Route::get('/',[AdminHomeController::class,'index']);
+    Route::get('/',[AdminHomeController::class,'index'])->name('admin');
+    Route::get('/login',[LoginController::class,'index'])->name('login');
 });
 
 
-Route::get('/authenticate',Function(){
-    echo 'Login do sistema';
-})->name('login');
+
+//Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
