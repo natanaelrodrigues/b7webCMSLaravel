@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\support\Facades\Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -44,5 +46,10 @@ class LoginController extends Controller
 
     public function authenticate(){
         
+    }
+
+    public function logout(){
+        Auth::logout();
+        return Redirect()->route('login');
     }
 }
