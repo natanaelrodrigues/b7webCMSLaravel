@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Illuminate\support\Facades\Auth;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 class LoginController extends Controller
 {
     /*
@@ -28,7 +31,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/painel';
+    protected $redirectTo = 'painel';
 
     /**
      * Create a new controller instance.
@@ -44,12 +47,43 @@ class LoginController extends Controller
         return view('admin.login');
     }
 
-    public function authenticate(){
+    public function authenticate(Request $request){
+        $data = $request->only([
+            'email',
+            'password',
+            'remenber'
+        ]);
+
+        $validator = $this->validator($data);
+
+        if ($validator->fails()){
+            return Redirect()->route('login')
+                             ->withErriors($validator)
+                             ->withInputs();
+        }
+
+        if(Auth::attempt($data)){
+            return Redirect()->Route('admin');
+        } else {
+            $validator->errors()->add('password','E-mail e/ou Senha errados!');
+
+            return Redirect()->Route('login')
+                             ->withErrors($validator)
+                             ->withInput();
+        }
         
     }
 
     public function logout(){
         Auth::logout();
         return Redirect()->route('login');
+    }
+
+    protected function validator(array $data){
+        return Validator::make($data,[
+            'email' => ['required','string','email','max:100'],
+            'password' =>['required','string','min:4']
+            
+        ]);
     }
 }
