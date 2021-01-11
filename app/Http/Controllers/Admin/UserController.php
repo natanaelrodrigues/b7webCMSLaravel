@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class UserController extends Controller
@@ -182,6 +183,16 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $loggedId = intval(Auth::id());
+
+
+        if ($loggedId !== intval($id)){
+            $user = User::find($id);
+            if ($user){
+                $user->delete();
+            }
+        };
+        
+        return redirect()->route('users.index');
     }
 }
