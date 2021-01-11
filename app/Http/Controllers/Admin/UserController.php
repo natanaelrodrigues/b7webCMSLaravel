@@ -21,8 +21,10 @@ class UserController extends Controller
     public function index()
     {
         $users = User::All();
+        $loggedId = intval(Auth::id());
         return view('admin.users.index',[
-            'users' => $users
+            'users' => $users,
+            'loggedId' =>$loggedId 
         ]);
     }
 
