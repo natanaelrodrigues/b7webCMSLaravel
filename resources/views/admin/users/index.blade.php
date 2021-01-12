@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-<<<<<<< HEAD:resources/views/Admin/users/index.blade.php
+
     <div class="card">
         <div class="card-body">
             <table class="table table-hover">
@@ -49,35 +49,5 @@
     <div>
         {{ $users->links('pagination::bootstrap-4') }} 
     </div>
-=======
-    <table class="table table-hover">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>E-Mail</th>
-            <th>Ações</th>
-        </tr>
-        @foreach($users as $user) 
-
-        <tr>
-            <td>{{$user->id}}</td>
-            <td>{{$user->name}}</td>
-            <td>email</td>
-            <td>
-                <a href="{{ route('users.edit',['user' => $user->id]) }}" class="btn btn-sm btn-info">Editar</a> 
-                @if($loggedId !== intval($user->id))
-                    <form class="d-inline" method='POST' action="{{ route('users.destroy',['user' => $user->id]) }}">
-                        @method('DELETE')
-                        @csrf
-                        <button class="btn btn-sm btn-danger">Excluir</button>
-                    </form>
-                @endif
-            </td>
-        </tr>
-         
-        @endforeach
-    </table>
-
->>>>>>> 8c901f4c4a023ce4e9beeea010122922d5cbaf93:resources/views/admin/users/index.blade.php
 
 @endsection
