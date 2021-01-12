@@ -251,6 +251,7 @@ return [
             'text'        => 'Meus usuários',
             'url'         => 'painel/users',
             'icon'        => 'far fa-fw fa-file',
+            'can'         => 'isAdmin'
         ],
         ['header' => 'account_settings'],
         [
