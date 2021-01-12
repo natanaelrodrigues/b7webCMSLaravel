@@ -28,6 +28,7 @@ class UserController extends Controller
         //$users = User::All();
         $users = User::paginate(2);
         $loggedId = intval(Auth::id());
+        
         return view('admin.users.index',[
             'users' => $users,
             'loggedId' =>$loggedId 
