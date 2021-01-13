@@ -253,10 +253,15 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'can'         => 'isAdmin'
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'Configurações'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'Configurações do Site',
+            'url'  => 'painel/settings',
+            'icon' => 'fas fa-fw fa-file',
+        ],
+        [
+            'text' => 'Meu perfil',
+            'url'  => 'painel/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
        /*[
