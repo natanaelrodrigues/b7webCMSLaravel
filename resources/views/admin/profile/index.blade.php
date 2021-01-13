@@ -8,7 +8,7 @@
 
 @section('content')
     @if($errors->any())
-    <div class="alert alert-danger">
+    <div class="alert alert-success">
         <h5><i class="icon fas fa-ban"></i> Ocorreu erro no processo!</h5>
         <ul>
             @foreach ($errors->all() as $error)
@@ -16,6 +16,14 @@
             @endforeach
         </ul>
     </div>
+    @endif
+
+    @if(session('warning'))
+        <div class="alert alert-info">
+            
+            {{session('warning')}}
+            
+        </div>
     @endif
 
 <div class="card">
