@@ -7,6 +7,18 @@
 @endsection
 
 @section('content')
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <h5><i class="icon fas fa-ban"></i> Ocorreu erro no processo!</h5>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
   <div class="card">
       <div class="card-body">
           <form action="{{route('settings.save')}}" method="POST" class="form-horizontal">
@@ -16,28 +28,28 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Título do site</label>
                 <label class="col-sm-10 ">
-                    <input type="text" name="title" class="form-control">
+                    <input type="text" name="title" value="{{$settings['title']}}" class="form-control">
                 </label>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Sub-título do site</label>
                 <label class="col-sm-10 ">
-                    <input type="text" name="subtitle" class="form-control">
+                    <input type="text" name="subtitle" value="{{$settings['subtitle']}}" class="form-control">
                 </label>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">E-mail para contato</label>
                 <label class="col-sm-10 ">
-                    <input type="email" name="email" class="form-control">
+                    <input type="email" name="email" value="{{$settings['email']}}" class="form-control">
                 </label>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Cor do Fundo do Site</label>
                 <label class="col-sm-2 ">
-                    <input type="color" name="bgColor" class="form-control">
+                    <input type="color" name="bgColor" value="{{$settings['bgColor']}}" class="form-control">
                 </label>
                 <label class="col-sm-7"></label>
             </div>
@@ -45,7 +57,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Cor do Texto do Site</label>
                 <label class="col-sm-2">
-                    <input type="color" name="textColor" class="form-control">
+                    <input type="color" name="textColor" value="{{$settings['textColor']}}" class="form-control">
                 </label>
                 <label class="col-sm-7"></label>
             </div>
