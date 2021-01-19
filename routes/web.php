@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Site\HomeController as SiteHomeControler;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 /*
@@ -41,6 +42,7 @@ Route::prefix('painel')->group(Function(){
     //controle de usuario 
     // na criação do controler foi usado o --resource
     Route::resource('users',UserController::class);
+    Route::resource('pages',PageController::class);
     
     Route::get('profile',[ProfileController::class, 'index'])->name('profile');
     Route::put('profilesave',[ProfileController::class, 'save'])->name('profile.save');
