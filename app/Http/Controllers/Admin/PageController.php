@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Page;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
@@ -23,7 +24,8 @@ class PageController extends Controller
     public function index()
     {
         $pages = Page::paginate(10);
-                
+
+
         return view('admin.pages.index',[
             'pages' => $pages,
         ]);
@@ -36,7 +38,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.create');
     }
 
     /**
@@ -47,7 +49,32 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->only([
+            'title',
+            'body',
+        ]);
+
+        $data['slug'] = Str::slug($data['title'],'-');
+
+        $validator = Validator::make($data,[
+            'title' => ['required','string','max:100'],
+            'body' => ['string',],
+            'slug' => ['required','string','max:100','unique:pages']
+        ]);
+
+        if ($validator->fails()){
+            return Redirect()->route('pages.create')
+                           ->withErrors($validator)
+                           ->withInputs();
+        }
+
+        $page = new page;
+        $page->title = $data['title'];
+        $page->slug  = $data['slug'];
+        $page->body  = $data['body'];
+        $page->save();
+
+        return Redirect()->route('pages.index');
     }
 
     /**

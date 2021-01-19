@@ -16,9 +16,9 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th width="50">ID</th>
                         <th>Titulo</th>
-                        <th>Ações</th>
+                        <th width="180">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,8 +28,9 @@
                             <td>{{$page->id}}</td>
                             <td>{{$page->title}}</td>
                             <td>
-                                <a href="{{ route('pagers.edit',['user' => $page->id]) }}" class="btn btn-sm btn-info">Editar</a> 
-                                <form class="d-inline" method='POST' action="{{ route('pages.destroy',['user' => $page->id]) }}">
+                                <a href="" target="_blank" class="btn btn-sm btn-success">Ver</a>
+                                <a href="{{ route('pages.edit',['page' => $page->id]) }}" class="btn btn-sm btn-info">Editar</a> 
+                                <form class="d-inline" method='POST' action="{{ route('pages.destroy',['page' => $page->id]) }}">
                                     @method('DELETE')
                                     @csrf
                                     <button class="btn btn-sm btn-danger">Excluir</button>

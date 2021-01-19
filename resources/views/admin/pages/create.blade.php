@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title','Novo Usuário')
+@section('title','Nova Página')
 
 @section('content_header')
     <h1>
-        Novo Usuário        
+        Nova Página
     </h1>
 @endsection
 
@@ -27,36 +27,27 @@
 
         </div> -->
         <div class="card-body">
-            <form action="{{ROUTE('users.store')}}" method="POST" class="form-horizontal">
+            <form action="{{ROUTE('pages.store')}}" method="POST" class="form-horizontal">
                 @csrf
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nome Completo</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Titulo da Pagina</label>
                     <div class="col-sm-10">
-                        <input type="text" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" id="inputEmail3" placeholder="Nome Completo">
+                        <input type="text" name="title" value="{{old('title')}}" class="form-control @error('title') is-invalid @enderror" id="inputEmail3" placeholder="Titulo Pagina">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">E-mail</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Corpo</label>
                     <div class="col-sm-10">
-                        <input type="email" name="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror" id="inputEmail3" placeholder="E-mail">
+                        <textarea name="body"  class="form-control" cols="30" rows="5" >
+                            {{old('body')}}
+                        </textarea>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Senha</label>
-                    <div class="col-sm-10">
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="inputEmail3" placeholder="Informe a senha">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Confirme da Senha</label>
-                    <div class="col-sm-10">
-                        <input type="password" name="password_confirmation" class="form-control @error('password') is-invalid @enderror" id="inputEmail3" placeholder="Confirme a senha">
-                    </div>
-                </div>
+               
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
-                        <input type="submit" value="Cadastrar" class="btn btn-success">
+                        <input type="submit" value="Salvar" class="btn btn-success">
                     </div>
                 </div>
             </form>
