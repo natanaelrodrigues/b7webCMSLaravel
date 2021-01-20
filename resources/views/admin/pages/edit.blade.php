@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title','Editar Usuário')
+@section('title','Editar Páginas')
 
 @section('content_header')
     <h1>
-        Editar Usuário     
+        Editar Páginas     
     </h1>
 @endsection
 
@@ -27,33 +27,22 @@
 
         </div> -->
         <div class="card-body">
-            <form action="{{ROUTE('users.update',['user'=>$user->id])}}" method="POST" class="form-horizontal">
+            <form action="{{ROUTE('pages.update',['page'=>$page->id])}}" method="POST" class="form-horizontal">
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nome Completo</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Título</label>
                     <div class="col-sm-10">
-                        <input type="text" name="name" value="{{$user->name}}" class="form-control @error('name') is-invalid @enderror" id="inputEmail3" placeholder="Nome Completo">
+                        <input type="text" name="title" value="{{$page->title}}" class="form-control @error('title') is-invalid @enderror" id="inputEmail3" placeholder="Título da Página">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">E-mail</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Corpo</label>
                     <div class="col-sm-10">
-                        <input type="email" name="email" value="{{$user->email}}" class="form-control @error('email') is-invalid @enderror" id="inputEmail3" placeholder="E-mail">
+                        <textarea name="body" cols="30" rows="10" class="form-control">{{$page->body}}</textarea>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nova senha</label>
-                    <div class="col-sm-10">
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="inputEmail3" placeholder="Informe a senha">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Confirme da Senha</label>
-                    <div class="col-sm-10">
-                        <input type="password" name="password_confirmation" class="form-control @error('password') is-invalid @enderror" id="inputEmail3" placeholder="Confirme a senha">
-                    </div>
-                </div>
+               
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
