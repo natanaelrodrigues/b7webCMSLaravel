@@ -31,15 +31,16 @@ class HomeController extends Controller
         
         $pageCount   = Page::count();
         $userCount   = User::count();
+        $pagePie = [];
 
-        $pagePai = [
-            'Teste1' => 101,
-            'Teste2' => 300,
-            'Teste3' => 205,
-        ];
+        $visitsAll = Visitor::selectRaw('page, count(page) as c')->groupBy('page')->get();
 
-        $pageLabels = json_encode(array_keys($pagePai));
-        $pageValues = json_encode(array_values($pagePai));
+        foreach($visitsAll as $visit){
+            $pagePie[ $visit['page'] ] = intval($visit['c']);
+        }
+
+        $pageLabels = json_encode(array_keys($pagePie));
+        $pageValues = json_encode(array_values($pagePie));
 
         return view('admin.home',[
             'visitsCount' => $visitsCount,
