@@ -17,9 +17,16 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index(Request $request){
 
-        $visitsCount = Visitor::count();
+        $interval = intval($request->input('interval',30));
+        if($interval > 120) {
+            $interval = 120;
+        }
+
+        $dateInterval = date('Y-m-d H:i:s',strtotime('-'.$interval.' days'));
+
+        $visitsCount = Visitor::where('date_access','>=',$dateInterval)->count();
 
         $dateLimit = date('Y-m-d H:i:s',strtotime('-5 minutes'));
         
@@ -33,7 +40,10 @@ class HomeController extends Controller
         $userCount   = User::count();
         $pagePie = [];
 
-        $visitsAll = Visitor::selectRaw('page, count(page) as c')->groupBy('page')->get();
+        $visitsAll = Visitor::selectRaw('page, count(page) as c')
+                            ->where('date_access','>=',$dateInterval)
+                            ->groupBy('page')
+                            ->get();
 
         foreach($visitsAll as $visit){
             $pagePie[ $visit['page'] ] = intval($visit['c']);
@@ -48,7 +58,8 @@ class HomeController extends Controller
             'pageCount' => $pageCount,
             'userCount' => $userCount,
             'pageLabels' => $pageLabels,
-            'pageValues' => $pageValues
+            'pageValues' => $pageValues,
+            'dateInterval' => $interval
         ]);
     }
 }
